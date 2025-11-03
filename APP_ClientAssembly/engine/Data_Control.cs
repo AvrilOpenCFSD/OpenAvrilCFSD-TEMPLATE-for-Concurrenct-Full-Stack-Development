@@ -27,6 +27,7 @@
             Avril_FSD.ClientAssembly.Inputs.Input BACK_inputDoubleBuffer
         )
         {
+            System.Console.WriteLine("entered => Push_Stack_Client_InputAction()");//TestBench
             stack_Client_InputSend.Add(BACK_inputDoubleBuffer);
             if(stack_Client_InputSend.Count >= 2)
             {
@@ -36,6 +37,7 @@
             {
                 Set_flag_IsLoaded_Stack_InputAction(false);
             }
+            System.Console.WriteLine("exiting => Push_Stack_Client_InputAction()");//TestBench
         }
         public void Push_Stack_Client_OutputRecieve(
             List<Avril_FSD.ClientAssembly.Outputs.Output> stack_Client_OutputRecieves,
@@ -93,10 +95,10 @@
                     break;
 
                 case 1:
-                    Avril_FSD.ClientAssembly.Praise_Files.Praise1_Output subset = (Avril_FSD.ClientAssembly.Praise_Files.Praise1_Output)stackSlot.Get_praiseOutputBuffer_Subset();
-                    obj.Get_client().Get_data().Get_gameInstance().Get_gameObjectFactory().Get_player().Get_CameraFP().Set_fowards(subset.Get_fowards());
-                    obj.Get_client().Get_data().Get_gameInstance().Get_gameObjectFactory().Get_player().Get_CameraFP().Set_right(subset.Get_right());
-                    obj.Get_client().Get_data().Get_gameInstance().Get_gameObjectFactory().Get_player().Get_CameraFP().Set_up(subset.Get_up());
+                    var output_Subset_Praise1 = (Avril_FSD.ClientAssembly.Praise_Files.Praise1_Output)stackSlot.Get_praiseOutputBuffer_Subset();
+                    obj.Get_client().Get_data().Get_gameInstance().Get_gameObjectFactory().Get_player().Get_CameraFP().Set_fowards(output_Subset_Praise1.Get_fowards());
+                    obj.Get_client().Get_data().Get_gameInstance().Get_gameObjectFactory().Get_player().Get_CameraFP().Set_right(output_Subset_Praise1.Get_right());
+                    obj.Get_client().Get_data().Get_gameInstance().Get_gameObjectFactory().Get_player().Get_CameraFP().Set_up(output_Subset_Praise1.Get_up());
                     obj.Get_client().Get_data().Get_data_Control().Set_isPraiseActive(1, false);
                     break;
             }

@@ -3,7 +3,7 @@ namespace Avril_FSD.ServerAssembly
 {
     public class Execute_Control
     {
-        
+        private bool _flag_SystemInitialised;
         private bool[] _flag_ThreadInitialised;
 
         public Execute_Control(int numberOfCores)
@@ -13,11 +13,11 @@ namespace Avril_FSD.ServerAssembly
             {
                 Set_flag_ThreadInitialised(index, true);
             }
+            _flag_SystemInitialised = true;
         }
-
-        public bool Get_flag_isInitialised_ClientApp()
+        private void Calc_flag_SystemInitialised()
         {
-            bool _flag_SystemInitialised = false;
+            _flag_SystemInitialised = false;
             for (byte index = 0; index < _flag_ThreadInitialised.Length; index++)
             {
                 if (Get_flag_ThreadInitialised(index) == true)
@@ -25,9 +25,12 @@ namespace Avril_FSD.ServerAssembly
                     _flag_SystemInitialised = true;
                 }
             }
+        }
+        public bool Get_flag_isInitialised_ServerShell()
+        {
             return _flag_SystemInitialised;
         }
-                public bool Get_flag_ThreadInitialised(byte coreId)
+        public bool Get_flag_ThreadInitialised(byte coreId)
         {
             return _flag_ThreadInitialised[coreId];
         }
@@ -38,6 +41,7 @@ namespace Avril_FSD.ServerAssembly
         public void Set_flag_ThreadInitialised(byte coreId, bool value)
         {
             _flag_ThreadInitialised[coreId] = false;
+            Calc_flag_SystemInitialised();
         }
     }
 }

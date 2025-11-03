@@ -30,17 +30,11 @@ namespace Avril_FSD.ClientAssembly
         }
         public bool Get_flag_SystemInitialised()
         {
-            //System.Console.WriteLine("Get_flag_SystemInitialised() not => FALSE");//TestBench
             return _flag_SystemInitialised;
         }
         public bool Get_flag_ThreadInitialised(byte coreId)
         {   
             return _flag_ThreadInitialised[coreId];
-        }
-
-        public void SetConditionCodeOfThisThreadedCore(byte coreId)
-        {
-            Set_flag_ThreadInitialised(coreId, false);
         }
 
         private void Set_flag_SystemInitialised(bool flag)

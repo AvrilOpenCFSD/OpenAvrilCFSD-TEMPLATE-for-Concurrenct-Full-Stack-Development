@@ -19,8 +19,8 @@
             while (Get_io_ListenRespond() == null) { }
             Get_io_ListenRespond().InitialiseControl();
 
-            _concurrency = new Avril_FSD.ClientAssembly.Concurrent[numberOfCores - 3];
-            for (byte index = 0; index < numberOfCores - 3; index++)
+            _concurrency = new Avril_FSD.ClientAssembly.Concurrent[(byte)(numberOfCores - (byte)2)];
+            for (byte index = 0; index < (byte)(numberOfCores - (byte)2); index++)
             {
                 Set_concurrent(index, new Avril_FSD.ClientAssembly.Concurrent());
                 while (Get_concurrent(index) == null) { }

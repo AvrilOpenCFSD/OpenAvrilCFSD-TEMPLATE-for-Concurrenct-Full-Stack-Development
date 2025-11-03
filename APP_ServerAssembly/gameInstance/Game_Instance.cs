@@ -166,7 +166,7 @@ namespace Avril_FSD.ServerAssembly
             {
                 item.Update(_time, e.Time);
             }
-            if(Avril_FSD.ServerAssembly.Program.Get_framework_Server().Get_server().Get_execute().Get_execute_Control().Get_flag_isInitialised_ClientApp())
+            if(Avril_FSD.ServerAssembly.Program.Get_framework_Server().Get_server().Get_execute().Get_execute_Control().Get_flag_isInitialised_ServerShell())
             {
                 HandleKeyboard(e.Time);
                 HandleMouse();

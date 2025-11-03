@@ -133,16 +133,14 @@ namespace Avril_FSD.ClientAssembly
 
             Avril_FSD.ClientAssembly.Framework_Client obj = Avril_FSD.ClientAssembly.Program.Get_framework_Client();
             obj.Get_client().Get_execute().Initialise_Threads(obj);
-            while (obj.Get_client().Get_execute().Get_execute_Control().Get_flag_SystemInitialised() == true)
-            {
 
-            }
             System.Console.WriteLine("OnLoad .. done");
         }
 
         private void OnClosed(object sender, EventArgs eventArgs)
         {
             Exit();
+
         }
 
         public override void Exit()
@@ -193,13 +191,13 @@ namespace Avril_FSD.ClientAssembly
         }
         private void HandleMouse(Avril_FSD.ClientAssembly.Framework_Client obj)
         {
-            Console.WriteLine("TESTBENCH => HandleMouse");
+            //Console.WriteLine("TESTBENCH => HandleMouse");
             MouseState mouseState = Mouse.GetCursorState();
             var buffer = obj.Get_client().Get_data().Get_input_Instnace().Get_FRONT_inputDoubleBuffer(obj);
-            Console.WriteLine("Get_isPraiseActive() = " + obj.Get_client().Get_data().Get_data_Control().Get_isPraiseActive(1));
+            //Console.WriteLine("Get_isPraiseActive() = " + obj.Get_client().Get_data().Get_data_Control().Get_isPraiseActive(1));
             if (obj.Get_client().Get_data().Get_data_Control().Get_isPraiseActive(1) == false)
             {
-                Console.WriteLine("TESTBENCH => Do PRAISE 1 start");
+                //Console.WriteLine("TESTBENCH => Do PRAISE 1 start");
                 obj.Get_client().Get_data().Get_data_Control().Set_isPraiseActive(1, true);
                 buffer.Set_playerId(0);
                 buffer.Set_praiseEventId(1);
@@ -209,7 +207,7 @@ namespace Avril_FSD.ClientAssembly
                 subset.Set_Mouse_Y(mouseState.Y);
                 obj.Get_client().Get_data().Flip_InBufferToWrite();
                 obj.Get_client().Get_data().Get_data_Control().Push_Stack_Client_InputAction(obj.Get_client().Get_data().Get_input_Instnace().Get_stack_Client_InputSend(), obj.Get_client().Get_data().Get_input_Instnace().Get_BACK_inputDoubleBuffer(obj));
-                Console.WriteLine("TESTBENCH => Do PRAISE 1 end");
+                //Console.WriteLine("TESTBENCH => Do PRAISE 1 end");
             }
         }
         private void HandleKeyboard(Avril_FSD.ClientAssembly.Framework_Client obj, double dt)

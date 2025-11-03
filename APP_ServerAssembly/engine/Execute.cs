@@ -32,15 +32,13 @@ namespace Avril_FSD.ServerAssembly
         }
         public void Initialise_Threads(Avril_FSD.ServerAssembly.Framework_Server obj)
         {
-            obj.Get_server().Get_execute().Set_thread(0, new Thread(obj.Get_server().Get_algorithms().Get_io_ListenRespond().Thread_Input_Listen));
-            obj.Get_server().Get_algorithms().Get_io_ListenRespond().Set_listen_CoreId(0);
-            obj.Get_server().Get_execute().Get_thread(0).Start();
-            System.Console.WriteLine("starting = > Set_listen_CoreId on core " + (0).ToString());//TESTBENCH
-
-            obj.Get_server().Get_execute().Set_thread(1, new Thread(obj.Get_server().Get_algorithms().Get_io_ListenRespond().Thread_Output_Respond));
-            obj.Get_server().Get_algorithms().Get_io_ListenRespond().Set_respond_CoreId(1);
-            obj.Get_server().Get_execute().Get_thread(1).Start();
-            System.Console.WriteLine("starting = > Thread_Output_Respond on core " + (1).ToString());//TESTBENCH
+            byte threadIdCounter = 0;
+            obj.Get_server().Get_execute().Set_thread(threadIdCounter, Thread.CurrentThread);
+            
+            threadIdCounter++;
+            obj.Get_server().Get_execute().Set_thread(threadIdCounter, new Thread(() => obj.Get_server().Get_execute().Get_networking_Server().Thread_IO_Server(threadIdCounter)));
+            obj.Get_server().Get_execute().Get_thread(threadIdCounter).Start();
+            System.Console.WriteLine("starting = > Thread_IO_Server on core " + (threadIdCounter).ToString());//TESTBENCH
         }
 
         public void Create_And_Run_Graphics(Avril_FSD.ServerAssembly.Framework_Server obj)

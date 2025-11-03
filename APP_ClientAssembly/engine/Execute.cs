@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace Avril_FSD.ClientAssembly
 {
@@ -43,26 +44,23 @@ namespace Avril_FSD.ClientAssembly
         }
         public void Initialise_Threads(Avril_FSD.ClientAssembly.Framework_Client obj)
         {
-            obj.Get_client().Get_execute().Set_thread(0, Thread.CurrentThread);
-            obj.Get_client().Get_data().Get_gameInstance().Set_coreId(0);
-            System.Console.WriteLine("starting = > CurrentThread on core " + (0).ToString());//TESTBENCH
+            byte threadIdCounter = 0;
+            obj.Get_client().Get_execute().Set_thread(threadIdCounter, Thread.CurrentThread);
+            obj.Get_client().Get_execute().Get_execute_Control().Set_flag_ThreadInitialised(threadIdCounter, false);
+            System.Console.WriteLine("Thread Initalised => CurrentThread()" + (threadIdCounter).ToString());//TESTBENCH
 
-            obj.Get_client().Get_execute().Set_thread(1, new Thread(obj.Get_client().Get_algorithms().Get_io_ListenRespond().Thread_Input_Send));
-            obj.Get_client().Get_algorithms().Get_io_ListenRespond().Set_listen_CoreId(1);
-            obj.Get_client().Get_execute().Get_thread(1).Start();
-            System.Console.WriteLine("starting = > Thread_Input_Send on core " + (1).ToString());//TESTBENCH
+            threadIdCounter++;
+            obj.Get_client().Get_execute().Set_thread(threadIdCounter, new Thread(() => _networking_Client.Thread_IO_Client(threadIdCounter)));
+            obj.Get_client().Get_execute().Get_thread(threadIdCounter).Start();
+            System.Console.WriteLine("Thread Initalised => Thread_IO_Client on core " + (threadIdCounter).ToString());//TESTBENCH
 
-            obj.Get_client().Get_execute().Set_thread(2, new Thread(obj.Get_client().Get_algorithms().Get_io_ListenRespond().Thread_Output_Respond));
-            obj.Get_client().Get_algorithms().Get_io_ListenRespond().Set_respond_CoreId(2);
-            obj.Get_client().Get_execute().Get_thread(2).Start();
-            System.Console.WriteLine("starting = > Thread_Output_Respond on core " + (2).ToString());//TESTBENCH
-
-            for (byte i = 3; i < obj.Get_client().Get_global().Get_numberOfCores(); i++)
+            threadIdCounter++;
+            while (threadIdCounter < obj.Get_client().Get_global().Get_numberOfCores())
             {
-                obj.Get_client().Get_execute().Set_thread(i, new Thread(new Avril_FSD.ClientAssembly.Concurrent().Thread_Concurrent));
-                obj.Get_client().Get_algorithms().Get_concurrent((byte)(i - 3)).Set_coreId(i);
-                obj.Get_client().Get_execute().Get_thread(i).Start();
-                System.Console.WriteLine("starting = > Thread_Concurrent on core " + (i).ToString());//TESTBENCH
+                obj.Get_client().Get_execute().Set_thread(threadIdCounter, new Thread(() => obj.Get_client().Get_algorithms().Get_concurrent((byte)(threadIdCounter - (byte)2)).Thread_Concurrent(threadIdCounter)));
+                obj.Get_client().Get_execute().Get_thread(threadIdCounter).Start();
+                System.Console.WriteLine("Thread Initalised => Thread_Concurrent on core " + (threadIdCounter).ToString());//TESTBENCH
+                threadIdCounter++;
             }
         }
 
