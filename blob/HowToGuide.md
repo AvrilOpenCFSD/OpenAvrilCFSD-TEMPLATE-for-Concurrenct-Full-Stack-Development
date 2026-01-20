@@ -1344,38 +1344,6 @@ MessageCallback message = (in NetworkingMessage netMessage) => {
             }
         }
 ````
-Decode NetworkingSteam At Client Output Recieve
-https://github.com/OpenFSD/Avril_Full_Stack_Development_Template/blob/master/APP_ServerAssembly/engine/IO_Listen_Respond.cs
-````
-        public void Decode_NetworkingSteam_At_Client_Recieve(Avril_FSD.ClientAssembly.Framework_Client obj, Avril_FSD.ClientAssembly.Outputs.Output output, byte[] buffer)
-        {
-            output.Set_praiseEventId(buffer[0]);
-            output.Set_playerId(buffer[1]);
-            switch (output.Get_praiseEventId())
-            {
-                case 0:
-
-                    break;
-
-                case 1:
-                    var subset = (Avril_FSD.ClientAssembly.Praise_Files.Praise1_Output)output.Get_praiseOutputBuffer_Subset();
-                    Vector3 tempVector = new Vector3(0);
-                    tempVector.X = BitConverter.ToSingle(buffer, 2);
-                    tempVector.Y = BitConverter.ToSingle(buffer, 6);
-                    tempVector.Z = BitConverter.ToSingle(buffer, 10);
-                    subset.Set_fowards(tempVector);
-                    tempVector.X = BitConverter.ToSingle(buffer, 14);
-                    tempVector.Y = BitConverter.ToSingle(buffer, 18);
-                    tempVector.Z = BitConverter.ToSingle(buffer, 22);
-                    subset.Set_right(tempVector);
-                    tempVector.X = BitConverter.ToSingle(buffer, 26);
-                    tempVector.Y = BitConverter.ToSingle(buffer, 30);
-                    tempVector.Z = BitConverter.ToSingle(buffer, 34);
-                    subset.Set_up(tempVector);
-                    break;
-            }
-        }
-````
 Decode NetworkingSteam At Client Recieve
 https://github.com/OpenFSD/Avril_Full_Stack_Development_Template/blob/master/APP_ClientAssembly/engine/IO_Listen_Respond.cs
 ````
