@@ -1,4 +1,4 @@
-# Full Stack Development Template.
+# Avril - Template for Concurrent Full Stack Development.
 
 Architecture
 https://drive.google.com/file/d/1svuNgH-MlriL9qiP9rHUULPCRE5zqDuz/view?usp=drive_link
