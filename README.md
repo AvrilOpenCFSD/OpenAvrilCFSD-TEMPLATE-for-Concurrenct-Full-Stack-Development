@@ -28,7 +28,7 @@ Version 17.13.4
 
 ## Dependencies.
 ### Server Library.
- - https://github.com/OpenFSD/ServerConcurrency
+ - https://github.com/OpenFSD/LIB_Concurrent_IO_Server
 
 ### WriteEnableForThreadsAtStacks.
  - https://github.com/OpenFSD/LIB_WriteEnableForThreadsAt_STACK
