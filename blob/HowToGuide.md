@@ -891,7 +891,7 @@ Thread IO Server Shell - Thread_IO_Server Output
 		Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVEROUTPUTRECIEVE.Write_End(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_Serv
 ````
 
-Thread IO Client Shell - Thread_IO_Client Input Send
+Thread IO Client Shell - Thread IO Client Input Recieve
 ````
 		Avril_FSD.Library_For_WriteEnableForThreadsAt_SERVERINPUTACTION.Write_Start(Avril_FSD.Library_For_Server_Concurrency.Get_program_WriteEnableStack_ServerInputAction(), 0);
 		byte[] buffer = new byte[1024];
