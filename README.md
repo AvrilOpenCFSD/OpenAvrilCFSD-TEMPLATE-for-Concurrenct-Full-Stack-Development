@@ -1,4 +1,5 @@
 # Avril - Template for Open Concurrent Full Stack Development.
+<img width="1550" height="829" alt="flow chart" src="https://github.com/user-attachments/assets/959bb2bc-ddaf-4a97-ba76-a011cde11e4f" />
 
 Architecture
  - https://drive.google.com/file/d/1svuNgH-MlriL9qiP9rHUULPCRE5zqDuz/view?usp=drive_link
